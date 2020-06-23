@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    printf("Студент Гирин Михаил Алексеевич. Группа ИТ-193. Вариант № 6. \n");
+    float c,d,e,f,g,m,z,l,p,h,q,x,a,b,n,i,y,max;
+    scanf("%f",&a);   scanf("%f",&b);   scanf("%f",&n);
+    p=0; m=0; f=0; q=0; i=0; w=0;
+    if (n>0)
+    {
+    h=(b-a)/n; i=0;
+    while (i<n+1)
+        {
+            x=a+i*h;
+            if (x>0 && x<1)
+            {
+                c=pow(x,3)*exp(x-1);    e=pow(x,3)-(fabs(x));
+                f=log2(sqrt(x)-x);      y=c/e-f;
+                if(q==0) max=y;
+                if(max<y) max=y;
+                printf("При x=%f\n",x);   printf("y=%f\n",y);
+                p+=y; m++; q++;
+            }
+            else
+            {
+                w++; printf("Не подоходит по ОДЗ x=%f\n",x);
+            }
+            i++;
+        }
+        if (w==n)
+        {
+            printf("Решений нет");
+        }
+        else
+        {
+            l=p/m; printf("Максимальное значение =%f\n",max);
+            printf("Среднее значение =%f\n",l);
+        }
+    }
+    else
+    {
+        scanf("Решений нет");
+    }
+}
+hrev="style.css"
+ggbg
