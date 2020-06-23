@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+int** vvod(int** m, int n) //инициализация матрицы
+{   
+    int i, j;
+    m = new int* [n];
+    cout << "Введите элементы матрицы: \n";
+    for (i = 0; i < n; i++) 
+        {   
+            m[i] = new int[n]; //выделение памяти
+            for (j = 0; j < n; j++)
+                {   cout << "m[" << i+1 << "][" << j+1 << "] = ";
+                    cin >> m[i][j];
+                }
+        }        
+    return m;
+}
+
+void vivod(int** m, int n) //вывод матрицы на экран
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+                cout << m[i][j] << " ";
+                cout << "\n";
+        }
+}
+
+void maximum(int** m, int n)
+{
+    int i, j, max, im, jm, temp, mid;
+    max = m[0][0];
+    im = jm = 0;
+    for (i = 0; i < n; i++) //поиск max элемента
+            for (j = 0; j < n; j++) 
+                    if (m[i][j] > max) 
+                        {
+                            max = m[i][j];
+                            im = i;
+                            jm = j;
+                        }
+    cout << "\nМаксимальный элемент в матрице: " << max << "\n";
+    mid = n / 2; //поиск центра
+    while (jm != mid) // сдвиг по горизонтали
+        {
+            temp = m[im][n - 1];
+            for (int i = n - 1; i > 0; i--)
+                    m[im][i] = m[im][i - 1];
+            m[im][0] = temp;
+            if (jm == n-1) jm = 0;
+            else jm = jm + 1;
+        }
+    while (im != mid) // сдвиг по вертикали
+        {
+            temp = m[n - 1][jm];
+            for (int i = n - 1; i > 0; i--)
+                m[i][jm] = m[i - 1][jm];
+            m[0][jm] = temp;
+            if (im == n-1) im = 0;
+            else im = im + 1;
+        }
+}
+
+int main()
+{
+    setlocale(LC_CTYPE, "");
+    int n, ** m;    m = NULL;
+    do 
+        {
+            cout << "Введите размерность квадратной матрицы (значение должно быть НЕЧЕТНЫМ): ";
+            cin >> n;
+        }
+    while (n % 2 == 0); //выделение памяти
+    m = vvod(m, n);
+    cout << "\nИсходная матрица матрица: \n";
+    vivod(m, n);
+    maximum(m, n);
+    cout << "\nПреобразованная матрица: \n";
+    vivod (m, n);
+    delete[]m; //освобождение памяти
+}
